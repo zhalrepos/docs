@@ -1,0 +1,19 @@
+###############################################################
+# MIKROTIK: INDONESIA TIME ZONE NTP/SNTP CLIENT GENERATOR
+###############################################################
+
+/system clock manual set time-zone="+08:00"
+/system clock set time-zone-autodetec=no
+/system clock set time-zone-name="Asia/Makassar"
+/ip cloud set update-time=no
+/system ntp client set enabled=yes
+
+# RouterOS v6.xx
+/system ntp client set primary-ntp=202.65.114.202
+/system ntp client set secondary-ntp=212.26.18.41
+/system ntp client set server-dns-names=asia.pool.ntp.org
+
+# RouterOS v7.xx
+/system ntp client servers add address=202.118.1.81
+/system ntp client servers add address=202.112.29.82
+/system ntp client servers add address=asia.pool.ntp.org
