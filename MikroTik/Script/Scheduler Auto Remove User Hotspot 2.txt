@@ -1,0 +1,38 @@
+local a $user
+if ([len [/sys sch find where name=$a]] = 0) do={[
+/sys sch add name=$a  interval="02:00:00" start-date=$date on-event="if ([len [/ip hotspot user find where name=$a]] = 1) do={[/ip hotspot user rem [find where name=$a]]}
+/sys scr rem [find where name=$a]
+/sys sch rem [find where name=$a]"
+]}
+
+==============================================================
+
+local a $user
+if ([len [/ip hotspot user find where name=$a limit-uptime="1d 00:00:00"]] ) do={[/sys sch add name=$a  interval="1d 00:00:00" start-date=$date on-event="if ([len [/ip hotspot user find where name=$a limit-uptime < 00:00:20]] ) do={[/ip hotspot user remove [find where name=$a]]}
+/sys scr rem [find where name=$a]
+/sys sch rem [find where name=$a]
+/sys sch rem [find where name=$a]"
+]}
+
+
+local a $user
+if ([len [/ip hotspot user find where name=$a limit-uptime ="23:59:00"]] ) do={[/sys sch add name=$a  interval="2d 00:00:00" start-date=$date on-event="if ([len [/ip hotspot user find where name=$a limit-uptime < 00:00:05]] ) do={[/ip hotspot user remove [find where name=$a]]}
+/sys scr rem [find where name=$a]
+/sys sch rem [find where name=$a]
+/sys sch rem [find where name=$a]"
+]}
+ 
+ 
+==============================================================
+
+
+V.3 Final
+
+:if ([/ip hot ac f w user=$user]) do={
+[/sys sch a n=$user i=23h30m start-date=$date o="if ([/ip hot us g [f name=$user] uptime] = 23h or [/ip hot us g [f name=$user] limit-uptime] = 1s) d={[/ip hot us rem [f w name=$user]\n/sys sch rem [f w name=$user]\n/sys scr rem [f w name=~EDIT DISINI 1~]]}; :delay 5s;"]}
+
+
+PENJELASAN !!!
+
+1.  ~EDIT DISINI 1~ Di hapus lalu di isi sesuai penamaan script mikhmon
+2.  Scirpt Di isi di => ip -> hotspot -> user profile [Sub Menu SCRIPTS]
