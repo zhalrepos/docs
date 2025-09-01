@@ -1,0 +1,1 @@
+/sys scr rem [find where owner="(isi bulan+tahun)"]
