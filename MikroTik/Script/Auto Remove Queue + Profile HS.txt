@@ -1,0 +1,19 @@
+# Auto Remove HS Simple Queue + Profile HS Insert Queue Before
+
+# youtube tutorial             : https://youtu.be/4Q2-gJV413A
+
+# WA Konsultasi & Remote       : 085755478748 / 082350051008
+
+# Auto Remove HS Simple Queue
+/system scheduler
+add interval=1m name=autoremovehs on-event=\
+    "/queue simple remove [ find name ~\"hs-<\" ]\r\
+    \n" policy=ftp,reboot,read,write,policy,test,password,sniff,sensitive,romon \
+    start-date=may/10/2023 start-time=00:00:00
+
+# Auto Parent User Profile HS
+/system scheduler
+add interval=1m name=autoparentprofilehs on-event=\
+    "/ip hotspot user profile set parent-queue=Hotspot insert-queue-before=bottom [find]\r\
+    \n" policy=ftp,reboot,read,write,policy,test,password,sniff,sensitive,romon \
+    start-date=may/10/2023 start-time=00:00:00
