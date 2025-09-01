@@ -1,0 +1,15 @@
+
+
+
+FORWARD {
+  /ip firewall mangle add action=change-ttl chain=forward out-interface="Master-Bridge" dst-address="172.90.1.0/24" new-ttl=set:1 comment="Hotspot Protect - change TTL by buananet.com" passthrough=no
+  
+}
+
+OR
+
+
+POSTROUTING {
+  /ip firewall mangle add action=change-ttl chain=postrouting out-interface="Master-Bridge" dst-address="172.90.1.0/24" new-ttl=set:1 comment="Hotspot Protect - change TTL by buananet.com" passthrough=no
+  
+}
