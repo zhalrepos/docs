@@ -1,0 +1,1 @@
+/sys sch rem [find where name="auto-remove-script"]
