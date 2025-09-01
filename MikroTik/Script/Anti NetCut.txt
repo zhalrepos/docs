@@ -1,0 +1,18 @@
+# ANTI NETCUT
+
+/ip firewall address-list add list=netcut address=www.arcai.com comment="Anti Netcut"
+/ip firewall mangle add action=add-src-to-address-list address-list=NetcutUser address-list-timeout=1h5m chain=prerouting dst-address-list=netcut dst-port=80 protocol=tcp comment="Anti Netcut"
+/ip firewall filter add action=drop chain=forward src-address-list=NetcutUser comment="Anti Netcut"
+/system scheduler add interval=10m name="AutoBlockNetcut" comment="Anti Netcut"
+
+
+    <# Open System Scheduler and enter this script into "AutoBlockNetcut" #>
+
+
+local x [/ip firewall address-list get [find list="NetcutUser"] address]
+local z [/ip hotspot active get [find address=$x] mac-address]
+if ($x != "") do={[ /ip hotspot ip-binding add mac-address="$z" address="$x" type=blocked
+/ip firewall address-list remove [find address="$x"]
+/system scheduler add name ($x) interval="01:00:00" on "/ip hotspot ip-binding remove [find mac-address=$z]
+/system scheduler remove [find name=$x]"
+]}
