@@ -71,3 +71,10 @@ LimitB
 
 
 384K/1024K 512K/1152K 288K/768K 11/9 6 192K/512K
+
+
+
+640k/853k 1280k/1706k 480k/639k 13/13 1 320k/426k
+
+
+ip hotspot user profile set rate-limit="640k/1024k 1280k/2048k 480k/810k 13/13 1 320k/597k" [find where name="v5000"]
