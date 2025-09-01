@@ -29,3 +29,23 @@ http://idsly.bid/wX2X
 Silahkan kunjungi channel youtube kami di www.goo.gl/vkkvn5
 jika ada pertanyaan silahkan saja komen di bawah video
 thanks.
+
+============
+OTHERS
+
+/system scheduler
+add disabled=no interval=2m name=set on-event=\
+    "ip hotspot user profile set rate=2M/2M [find name=Tez]" policy=\
+    ftp,reboot,read,write,policy,test,password,sniff,sensitive,romon \
+    start-time=startup\
+add disabled=no interval=4m name=onset on-event=\
+    "/system scheduler remove [find name=set]" policy=\
+    ftp,reboot,read,write,policy,test,password,sniff,sensitive,romon \
+    start-time=startup
+
+
+local a $sc
+if ([len [/system scheduler find name=$a]] = 0) do={[
+/system scheduler add name=$a  interval="2m" start-time="startup" on-event="if ([len [/ip hotspot user find name=$a]] = 1) do={[/ip hotspot user remove [find name=$a]]}
+/system scheduler remove [find name=$a]"
+]}
