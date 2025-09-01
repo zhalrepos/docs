@@ -1,0 +1,36 @@
+:put (",ntfc,5000,23h,5000,,Disable,"); {:local date [ /system clock get date ];:local year [ :pick $date 7 11 ];:local month [ :pick $date 0 3 ];:local comment [ /ip hotspot user get [/ip hotspot user find where name="$user"] comment]; :local ucode [:pic $comment 0 2]; :if ($ucode = "vc" or $ucode = "up" or $comment = "") do={ /sys sch add name="$user" disable=no start-date=$date interval="23h"; :delay 2s; :local exp [ /sys sch get [ /sys sch find where name="$user" ] next-run]; :local getxp [len $exp]; :if ($getxp = 15) do={ :local d [:pic $exp 0 6]; :local t [:pic $exp 7 16]; :local s ("/"); :local exp ("$d$s$year $t"); /ip hotspot user set comment=$exp [find where name="$user"];}; :if ($getxp = 8) do={ /ip hotspot user set comment="$date $exp" [find where name="$user"];}; :if ($getxp > 15) do={ /ip hotspot user set comment=$exp [find where name="$user"];}; /sys sch remove [find where name="$user"]; :local mac $"mac-address"; :local time [/system clock get time ]; /system script add name="$user" owner="$month$year" source=$date comment=mikhmon}}
+
+
+
+:local a $user
+if ([len [/ip hotspot user find where name=$a limit-uptime="23:00:00"]] ) do={[/sys sch add name=$a  interval="1d 00:00:00" start-date=$date on-event="if ([len [/ip hotspot user find where name=$a limit-uptime < 00:00:20]] ) do={[/ip hotspot user remove [find where name=$a]]}
+/sys scr rem [find where name=$a]
+/sys sch rem [find where name=$a]"
+]}
+
+
+
+
+
+
+
+
+
+
+
+:put (",ntfc,5000,23h,5000,,Disable,"); {:local date [ /system clock get date ];:local year [ :pick $date 7 11 ];:local month [ :pick $date 0 3 ];:local comment [ /ip hotspot user get [/ip hotspot user find where name="$user"] comment]; :local ucode [:pic $comment 0 2]; :if ($ucode = "vc" or $ucode = "up" or $comment = "") do={ /sys sch add name="$user" disable=no start-date=$date interval="23h"; :delay 2s; :local exp [ /sys sch get [ /sys sch find where name="$user" ] next-run]; :local getxp [len $exp]; :if ($getxp = 15) do={ :local d [:pic $exp 0 6]; :local t [:pic $exp 7 16]; :local s ("/"); :local exp ("$d$s$year $t"); /ip hotspot user set comment=$exp [find where name="$user"];}; :if ($getxp = 8) do={ /ip hotspot user set comment="$date $exp" [find where name="$user"];}; :if ($getxp > 15) do={ /ip hotspot user set comment=$exp [find where name="$user"];}; /sys sch remove [find where name="$user"]; :local mac $"mac-address"; :local time [/system clock get time ]; /system script add name="$user" owner="$month$year" source=$date comment=mikhmon}}
+:local a $user
+if ([len [/ip hotspot user find where name=$a limit-uptime="23:00:00"]] ) do={[/sys sch add name=$a interval="1d 00:00:00" start-date=$date on-event="if ([len [/ip hotspot user find where name=$a limit-uptime < 00:00:20]] ) do={[/ip hotspot user remove [find where name=$a]]}
+/sys scr rem [find where name=$a]
+/sys sch rem [find where name=$a]"
+]}
+
+
+
+
+:put (",ntfc,5000,23h,5000,,Disable,"); {:local date [ /system clock get date ];:local year [ :pick $date 7 11 ];:local month [ :pick $date 0 3 ];:local comment [ /ip hotspot user get [/ip hotspot user find where name="$user"] comment]; :local ucode [:pic $comment 0 2]; :if ($ucode = "vc" or $ucode = "up" or $comment = "") do={ /sys sch add name="$user" disable=no start-date=$date interval="23h"; :delay 2s; :local exp [ /sys sch get [ /sys sch find where name="$user" ] next-run]; :local getxp [len $exp]; :if ($getxp = 15) do={ :local d [:pic $exp 0 6]; :local t [:pic $exp 7 16]; :local s ("/"); :local exp ("$d$s$year $t"); /ip hotspot user set comment=$exp [find where name="$user"];}; :if ($getxp = 8) do={ /ip hotspot user set comment="$date $exp" [find where name="$user"];}; :if ($getxp > 15) do={ /ip hotspot user set comment=$exp [find where name="$user"];}; /sys sch remove [find where name="$user"]; :local mac $"mac-address"; :local time [/system clock get time ]; /system script add name="$user" owner="$month$year" source=$date comment=mikhmon}}
+local a $user
+if ([len [/ip hotspot user find where name=$a limit-uptime="23:00:00"]] ) do={[/sys sch add name=$a  interval="1d 00:00:00" start-date=$date on-event="if ([len [/ip hotspot user find where name=$a limit-uptime < 00:00:20]] ) do={[/ip hotspot user remove [find where name=$a]]}
+/sys scr rem [find where name=$a]
+/sys sch rem [find where name=$a]"
+]}
