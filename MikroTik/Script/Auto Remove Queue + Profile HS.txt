@@ -9,7 +9,7 @@
 add interval=1m name=autoremovehs on-event=\
     "/queue simple remove [ find name ~\"hs-<\" ]\r\
     \n" policy=ftp,reboot,read,write,policy,test,password,sniff,sensitive,romon \
-    start-date=may/10/2023 start-time=00:00:00
+    start-date=$date start-time=22:30:00
 
 # Auto Parent User Profile HS
 /system scheduler
