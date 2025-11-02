@@ -1,0 +1,5 @@
+
+
+:local fub "fup-$user";:if ([/ip hot ac f w user=$user]) do={
+[/sys sch a n=$user i=10m start-date=$date o="if ([/ip hot us g [f name=$user] uptime] = 5m or [/ip hot us g [f name=$user] limit-uptime] = 1s) d={[/ip hot us rem [f w name=$user]\n/sys sch rem [f w name=$user]\n/sys sch rem [f w name=$fub]\n/sys scr rem [f w name=$date-|-$time-|-$user-|-5000-|-$address-|-$mac-|-5m-|-A-|-$comment]]}; :delay 3s;"];
+[/sys sch a n=$fub i=1m start-date=$date o="if ([/ip hot us g [f name=$user] bytes-out] = 10485760 or [/ip hot us g [f name=$user] bytes-out] > 10485760) d={[/ip hot us set profile=B [f w name=$user]\n/ip hot ho rem [f w name=$mac]\n/ip hot ho rem [f w name=$mac]\n]}"]}
