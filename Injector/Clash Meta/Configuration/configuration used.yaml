@@ -1,0 +1,143 @@
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+tproxy-port: 7895
+ipv6: false
+mode: global
+log-level: info
+allow-lan: true
+external-controller: :9090
+secret: ""
+bind-address: "*"
+unified-delay: true
+tun:
+  enable: true
+  stack: system
+  auto-route: false
+  auto-detect-interface: false
+  dns-hijack:
+    - tcp://any:53
+profile:
+  store-selected: true
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: redir-host
+  fake-ip-range: 198.18.0.1/16
+  listen: 127.0.0.1:7874
+  fake-ip-filter:
+  - "+.*"
+  nameserver:
+    - 94.140.14.14
+    - 94.140.15.15
+    - https://dns.adguard.com/dns-query
+    - https://dns.adguard-dns.com/dns-query
+    - tls://dns.adguard.com
+    - tls://dns.adguard-dns.com
+  default-nameserver:
+    - 94.140.14.14
+    - 94.140.15.15
+    - 112.215.203.254
+  fallback:
+    - 94.140.14.14
+    - 94.140.15.15
+    - https://dns.adguard.com/dns-query
+    - https://dns.adguard-dns.com/dns-query
+    - https://cloudflare-dns.com/dns-query
+    - tls://dns.adguard.com
+    - tls://dns.adguard-dns.com
+# 104.18.25.139
+# 104.18.24.139
+# 104.16.143.237
+# 104.26.7.171
+# 104.18.12.36
+# 104.20.28.42
+# 172.67.74.70
+# 104.17.2.81
+proxies:
+  - name: 🇪🇽 vl ex-06
+    server: 104.18.24.139
+    port: 443
+    type: vless
+    uuid: 6f02eec7-d231-4243-ad50-df59d8063d84
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: speed.olinol.de5.net
+    network: ws
+    ws-opts:
+      path: /lifetime
+      headers:
+        Host: speed.olinol.de5.net
+    udp: true
+  - name: 🇪🇽 vl ex-07
+    server: 104.18.24.139
+    port: 443
+    type: vless
+    uuid: 51b74010-a425-11f0-b035-205c6d5f5d78
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: asia1.fufo.org
+    network: ws
+    ws-opts:
+      path: /vlws
+      headers:
+        Host: asia1.fufo.org
+    udp: true
+  - name: 🇪🇽 vl ex-08
+    server: 104.20.28.42
+    port: 443
+    type: vless
+    uuid: bbbbbbbb-cccc-4ddd-eeee-ffffffffffff
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: stbwrt.web.id
+    network: ws
+    ws-opts:
+      path: /Inconigto-Mode/172.232.238.56-443
+      headers:
+        Host: stbwrt.web.id
+    udp: true
+  - name: 🇪🇽 vl ex-09
+    server: 104.20.28.42
+    port: 443
+    type: vless
+    uuid: 6b6bd2f4-8e8b-52bd-b300-0455e66c99d9
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: fi1.xvless.online
+    network: ws
+    ws-opts:
+      path: /vless
+      headers:
+        Host: fi1.xvless.online
+    udp: true
+proxy-groups:
+  - name: 🇪🇽
+    type: select
+    proxies:
+      - 🇪🇽 vl ex-06
+      - 🇪🇽 vl ex-07
+      - 🇪🇽 vl ex-08
+      - 🇪🇽 vl ex-09
+      - DIRECT
+      - REJECT
+rules:
+  - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
+  - IP-CIDR,10.0.0.0/8,DIRECT
+  - IP-CIDR,100.64.0.0/10,DIRECT
+  - IP-CIDR,127.0.0.0/8,DIRECT
+  - IP-CIDR,169.254.0.0/8,DIRECT
+  - IP-CIDR,172.16.0.0/12,DIRECT
+  - IP-CIDR,192.168.0.0/16,DIRECT
+  - IP-CIDR,224.0.0.0/3,DIRECT
+  - IP-CIDR6,::1/128,DIRECT
+  - IP-CIDR6,fc00::/7,DIRECT
+  - IP-CIDR6,fe80::/10,DIRECT
+  - IP-CIDR6,fd00::/8,DIRECT
+  - MATCH,🇪🇽
+  
