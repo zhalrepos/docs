@@ -75,16 +75,16 @@ proxies:
     server: 104.18.24.139
     port: 443
     type: vless
-    uuid: 51b74010-a425-11f0-b035-205c6d5f5d78
+    uuid: 49ae9764-75c1-4da2-82a1-92cf3d541291
     cipher: auto
     tls: true
     skip-cert-verify: true
-    servername: asia1.fufo.org
+    servername: novantunnel.tech
     network: ws
     ws-opts:
-      path: /vlws
+      path: /Novan-SG1
       headers:
-        Host: asia1.fufo.org
+        Host: novantunnel.tech
     udp: true
   - name: 🇪🇽 vl ex-08
     server: 104.20.28.42
